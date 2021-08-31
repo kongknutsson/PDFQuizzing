@@ -38,15 +38,9 @@ class PDFWriter:
     def _generate_list_from(self, filename):
         tmp = self._parse_pdf(filename)
         words = set(nltk.corpus.words.words())
-        tmp =  " ".join(w for w in nltk.wordpunct_tokenize(tmp) if w.lower() in words or not w.isalpha())
+        tmp =  " ".join(w for w in nltk.wordpunct_tokenize(tmp) if w.lower() in words or w.isalpha())
         tmp = list(tmp.split("\n"))
-        # fjerner tomme tegn.
-        # TODO bruke strip()?
-        result = []
-        for item in tmp:
-            if item != "" and item != " ":
-                result.append(item)
-        self.word_list = result
+        self.word_list = tmp
 
     """
     Counts the words of self.word_list and adds them
